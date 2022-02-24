@@ -1,36 +1,29 @@
 ﻿using System;
 using System.IO;
 
-namespace Lab_8._2
+namespace Lab_8
 {
     class Program
     {
         static void Main(string[] args)
         {
-            StreamWriter sw = File.CreateText("D:/Обучение/BIM - проектирование ИТМО/08 Занятие/Sum.txt"); //Здесь мы создали поток sw, 
-                                                                                                           //а при помощи метода File.CreateText создали файл 
+            string dirName = "C:/Users/Пользователь/Desktop/СОШ 2 ТХ";
+            if (Directory.Exists(dirName))
             {
-                Random rnd = new Random();
-                for (int i = 0; i < 10; i++)
+                Console.WriteLine("Подкаталоги:");
+                string[] dirs = Directory.GetDirectories(dirName);
+                foreach (string s in dirs)
                 {
-                    sw.WriteLine(rnd.Next(500)); //Записываем случайные числа в наш файл
+                    Console.WriteLine(s);
+                }
+                Console.WriteLine();
+                Console.WriteLine("Файлы:");
+                string[] files = Directory.GetFiles(dirName);
+                foreach (string s in files)
+                {
+                    Console.WriteLine(s);
                 }
             }
-            sw.Close(); //Закрываем поток
-
-            string[] lines = File.ReadAllLines("D:/Обучение/BIM - проектирование ИТМО/08 Занятие/Sum.txt");
-
-            //объявим переменную для хранения суммы
-            int sum = 0;
-
-            //проходим по строкам одна за другой...
-            foreach (string line in lines)
-            //преобразование строки в число, а затем добавление ее к сумме
-            sum = sum + int.Parse(line);
-
-            Console.WriteLine("sum " + sum);
-            Console.ReadLine();
         }
     }
 }
-
